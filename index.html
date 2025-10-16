@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BadBet - Premium Sports Betting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1531415074968-036ba1b575da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #dc2626;
+        }
+
+        .logo span {
+            color: #f59e0b;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #e2e8f0;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #dc2626;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .auth-btn {
+            padding: 0.5rem 1.2rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .login {
+            background: transparent;
+            border: 1px solid #dc2626;
+            color: #dc2626;
+        }
+
+        .register {
+            background: #dc2626;
+            border: 1px solid #dc2626;
+            color: white;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 3rem;
+            margin: 3rem 0;
+        }
+
+        .hero-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            color: #dc2626;
+            display: block;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 500px;
+        }
+
+        .features {
+            display: flex;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .feature i {
+            color: #dc2626;
+            font-size: 1.2rem;
+        }
+
+        /* Lead Form */
+        .lead-form-container {
+            flex: 0 0 400px;
+            background: rgba(30, 41, 59, 0.95);
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-header h2 {
+            color: #f59e0b;
+            margin-bottom: 0.5rem;
+        }
+
+        .bonus-badge {
+            display: inline-block;
+            background: #f59e0b;
+            color: #1e293b;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #334155;
+            color: white;
+            font-size: 1rem;
+        }
+
+        input::placeholder {
+            color: #cbd5e1;
+        }
+
+        input:focus {
+            outline: 2px solid #dc2626;
+        }
+
+        /* CTA Buttons */
+        .cta-button {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-primary {
+            background: #dc2626;
+            color: white;
+        }
+
+        .cta-primary:hover {
+            background: #b91c1c;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(220, 38, 38, 0.4);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: #dc2626;
+            border: 2px solid #dc2626;
+        }
+
+        .cta-secondary:hover {
+            background: #dc2626;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Sports Section */
+        .sports-section {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .sports-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: #f59e0b;
+        }
+
+        .sports-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .sport-card {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .sport-card:hover {
+            transform: translateY(-5px);
+            background: rgba(220, 38, 38, 0.2);
+        }
+
+        .sport-card i {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #dc2626;
+        }
+
+        /* Telegram Button */
+        .telegram-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: #0088cc;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.5);
+            text-decoration: none;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .telegram-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.7);
+        }
+
+        /* Pop-up Styles */
+        #popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .popup-content {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 2.5rem;
+            border-radius: 15px;
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid #dc2626;
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: color 0.3s;
+        }
+
+        .close-popup:hover {
+            color: #dc2626;
+        }
+
+        .popup-bonus {
+            color: #f59e0b;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin: 1.2rem 0;
+            background: rgba(245, 158, 11, 0.1);
+            padding: 0.8rem;
+            border-radius: 8px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #dc2626;
+        }
+
+        .copyright {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .hero {
+                flex-direction: column;
+            }
+            
+            .lead-form-container {
+                flex: 1;
+                width: 100%;
+            }
+            
+            nav ul {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">BAD<span>BET</span></div>
+        <nav>
+            <ul>
+                <li><a href="#">Sports</a></li>
+                <li><a href="#">Live Betting</a></li>
+                <li><a href="#">Promotions</a></li>
+                <li><a href="#">Casino</a></li>
+                <li><a href="#">Support</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button class="auth-btn login">Log In</button>
+            <button class="auth-btn register">Register</button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>BET BAD <span>WIN BIG</span></h1>
+                <p>Join thousands of winners who trust BadBet for the best odds, fastest payouts, and exclusive bonuses.</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <i class="fas fa-bolt"></i>
+                        <span>Instant Payouts</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Best Odds</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure & Licensed</span>
+                    </div>
+                </div>
+                
+                <!-- Sports Section -->
+                <div class="sports-section">
+                    <h2>Popular Sports</h2>
+                    <div class="sports-grid">
+                        <div class="sport-card">
+                            <i class="fas fa-futbol"></i>
+                            <h3>Football</h3>
+                        </div>
+                        <div class="sport-card">
+                            <i class="fas fa-basketball-ball"></i>
+                            <h3>Basketball</h3>
+                        </div>
+                        <div class="sport-card">
+                            <i class="fas fa-table-tennis"></i>
+                            <h3>Tennis</h3>
+                        </div>
+                        <div class="sport-card">
+                            <i class="fas fa-hockey-puck"></i>
+                            <h3>Hockey</h3>
+                        </div>
+                        <div class="sport-card">
+                            <i class="fas fa-baseball-ball"></i>
+                            <h3>Baseball</h3>
+                        </div>
+                        <div class="sport-card">
+                            <i class="fas fa-fist-raised"></i>
+                            <h3>MMA</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Lead Form -->
+            <div class="lead-form-container">
+                <div class="form-header">
+                    <h2>WELCOME BONUS</h2>
+                    <div class="bonus-badge">$100 FREE BET</div>
+                    <p>Sign up now and get your bonus instantly!</p>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" placeholder="Enter your full name">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" placeholder="Your phone number">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Your email address">
+                </div>
+                
+                <!-- CTA Buttons -->
+                <button class="cta-button cta-primary">CLAIM MY $100 BONUS</button>
+                <button class="cta-button cta-secondary">VIEW LIVE MATCHES</button>
+                
+                <p style="font-size: 0.8rem; margin-top: 1rem; opacity: 0.7;">
+                    By registering you agree to our Terms & Conditions. 18+ only.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">About Us</a>
+            <a href="#">Responsible Gaming</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Contact Support</a>
+        </div>
+        <div class="copyright">
+            © 2023 BadBet. All rights reserved. 18+ only. Please gamble responsibly.
+        </div>
+    </footer>
+
+    <!-- Telegram Messenger Button -->
+    <a href="https://t.me/qwenough" class="telegram-float" target="_blank">
+        <i class="fab fa-telegram"></i>
+    </a>
+
+    <!-- Pop-up -->
+    <div id="popup">
+        <div class="popup-content">
+            <span class="close-popup">&times;</span>
+            <h2>EXCLUSIVE OFFER!</h2>
+            <p>For new players only - Limited time!</p>
+            <div class="popup-bonus">GET 15% EXTRA ON YOUR FIRST DEPOSIT</div>
+            <p>Use code: <strong style="color: #f59e0b;">WELCOME15</strong></p>
+            <button class="cta-button cta-primary" style="margin-top: 1.5rem;">CLAIM MY BONUS NOW</button>
+        </div>
+    </div>
+
+    <script>
+        // Pop-up after 15 seconds
+        setTimeout(function() {
+            document.getElementById('popup').style.display = 'flex';
+        }, 15000);
+
+        // Close pop-up functionality
+        document.querySelector('.close-popup').addEventListener('click', function() {
+            document.getElementById('popup').style.display = 'none';
+        });
+
+        // Form submission (basic)
+        document.querySelector('.cta-primary').addEventListener('click', function() {
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            
+            if(name && phone && email) {
+                alert('Thank you! Your $100 bonus will be activated soon.');
+                // Here you would normally send data to your server
+            } else {
+                alert('Please fill in all fields to claim your bonus.');
+            }
+        });
+
+        // Secondary CTA button
+        document.querySelector('.cta-secondary').addEventListener('click', function() {
+            alert('Redirecting to live matches...');
+            // Redirect to live matches page would go here
+        });
+
+        // Header auth buttons
+        document.querySelector('.login').addEventListener('click', function() {
+            alert('Redirecting to login...');
+        });
+
+        document.querySelector('.register').addEventListener('click', function() {
+            alert('Redirecting to registration...');
+        });
+    </script>
+</body>
+</html>
