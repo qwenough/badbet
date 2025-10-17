@@ -412,7 +412,6 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="logo">BAD<span>BET</span></div>
         <nav>
@@ -430,7 +429,6 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <div class="container">
         <div class="hero">
             <div class="hero-content">
@@ -452,7 +450,6 @@
                     </div>
                 </div>
                 
-                <!-- Sports Section -->
                 <div class="sports-section">
                     <h2>Popular Sports</h2>
                     <div class="sports-grid">
@@ -484,7 +481,6 @@
                 </div>
             </div>
             
-            <!-- Lead Form -->
             <div class="lead-form-container">
                 <div class="form-header">
                     <h2>WELCOME BONUS</h2>
@@ -505,7 +501,6 @@
                     <input type="email" id="email" placeholder="Your email address">
                 </div>
                 
-                <!-- CTA Buttons -->
                 <button class="cta-button cta-primary">CLAIM MY $100 BONUS</button>
                 <button class="cta-button cta-secondary">VIEW LIVE MATCHES</button>
                 
@@ -516,7 +511,6 @@
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-links">
             <a href="#">About Us</a>
@@ -530,12 +524,10 @@
         </div>
     </footer>
 
-    <!-- Telegram Messenger Button -->
     <a href="https://t.me/qwenough" class="telegram-float" target="_blank">
         <i class="fab fa-telegram"></i>
     </a>
 
-    <!-- Pop-up -->
     <div id="popup">
         <div class="popup-content">
             <span class="close-popup">&times;</span>
@@ -548,17 +540,14 @@
     </div>
 
     <script>
-        // Pop-up after 15 seconds
         setTimeout(function() {
             document.getElementById('popup').style.display = 'flex';
         }, 15000);
 
-        // Close pop-up functionality
         document.querySelector('.close-popup').addEventListener('click', function() {
             document.getElementById('popup').style.display = 'none';
         });
 
-        // Form submission (basic)
         document.querySelector('.cta-primary').addEventListener('click', function() {
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
@@ -566,19 +555,15 @@
             
             if(name && phone && email) {
                 alert('Thank you! Your $100 bonus will be activated soon.');
-                // Here you would normally send data to your server
             } else {
                 alert('Please fill in all fields to claim your bonus.');
             }
         });
 
-        // Secondary CTA button
         document.querySelector('.cta-secondary').addEventListener('click', function() {
             alert('Redirecting to live matches...');
-            // Redirect to live matches page would go here
         });
 
-        // Header auth buttons
         document.querySelector('.login').addEventListener('click', function() {
             alert('Redirecting to login...');
         });
